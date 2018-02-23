@@ -174,43 +174,37 @@
       \par
       El texto en claro es \textbf{Attack at dawn}, la clave es \textbf{Secre} para el algoritmo compilado o \textbf{5365637265} para OpenSSL. Ambas claves son la misma pero a OpenSSL hay que proporcionarsela
       en hexadecimal y al compilado se le da la cadena.
-      \par
-      Usar :\\
-      ./rc4 "Attack at dawn" "Secre"\\
-      echo ‐ne "Attack at dawn" $\mid$ openssl enc ‐rc4‐40 ‐K 5365637265 $\mid$ xxd –u ‐p
 
       \begin{figure}[!h]
         \centering
-        %\includegraphics[width = .9\textwidth]{cipher_rc4}
+        \includegraphics[width = .9\textwidth]{cipher_rc4}
         \caption{Cifrado con rc4-40.}
       \end{figure}
 
     \subsection{Funciones hash y HMAC}
       \par
-      Se ha realizado el resumen de \textit{/etc/services} que tiene un tamaño de TODO.
-
-      \par
-      Usar:\\
-      ls -l /etc/services\\
-      openssl dgst -md5 /etc/services\\
-      openssl dgst -sha1 /etc/services\\
-      openssl dgst -sha256 /etc/services\\
+      Se ha realizado el resumen de \textit{/etc/services} que tiene un tamaño de 19Kb.
+      \begin{figure}[!h]
+        \centering
+        \includegraphics[width = .9\textwidth]{etcserv_size}
+        \caption{Tamaño del fichero \textit{/etc/services}.}
+      \end{figure}
 
       \begin{figure}[!h]
         \centering
-        %\includegraphics[width = .9\textwidth]{hash_md5}
+        \includegraphics[width = .9\textwidth]{hash_md5}
         \caption{Hash utilizando md5.}
       \end{figure}
 
       \begin{figure}[!h]
         \centering
-        %\includegraphics[width = .9\textwidth]{hash_sha1}
+        \includegraphics[width = .9\textwidth]{hash_sha1}
         \caption{Hash utilizando sha1.}
       \end{figure}
 
       \begin{figure}[!h]
         \centering
-        %\includegraphics[width = .9\textwidth]{hash_sha256}
+        \includegraphics[width = .9\textwidth]{hash_sha256}
         \caption{Hash utilizando sha256.}
       \end{figure}
 
@@ -219,28 +213,21 @@
       El valor del HMAC depende de la clave utilizada y la función de hash escogidas.
       Se han obtenido los siguientes HMAC del fichero \textit{/etc/services}.
 
-      \par
-      Usar:\\
-      ls -l /etc/services\\
-      openssl dgst -md5 -hmac seguridad /etc/services\\
-      openssl dgst -sha1 -hmac seguridad /etc/services\\
-      openssl dgst -sha256 -hmac seguridad /etc/services\\
-
       \begin{figure}[!h]
         \centering
-        %\includegraphics[width = .9\textwidth]{hash_md5}
+        \includegraphics[width = .9\textwidth]{hmac_md5}
         \caption{HMAC utilizando md5.}
       \end{figure}
 
       \begin{figure}[!h]
         \centering
-        %\includegraphics[width = .9\textwidth]{hash_sha1}
+        \includegraphics[width = .9\textwidth]{hmac_sha1}
         \caption{HMAC utilizando sha1.}
       \end{figure}
 
       \begin{figure}[!h]
         \centering
-        %\includegraphics[width = .9\textwidth]{hash_sha256}
+        \includegraphics[width = .9\textwidth]{hmac_sha256}
         \caption{HMAC utilizando sha256.}
       \end{figure}
 
@@ -248,42 +235,32 @@
     \subsection{Cifrado y descifrado}
       \par
       Se ha cifrado el fichero \textit{/etc/services} utilizado la clave seguridad con \textbf{batch mode}, modo por bloques.
-
-      \par
-      Usar:\\
-      cp /etc/services \$HOME/services\\
-      gpg2 $--$version \hspace{10mm}y escoger uno de los algoritmos\\
-      gpg2 $--$symmetric $--$cipher-algo $<$algoritmo escogido$>$ -a \$HOME/services
+      
+      \begin{figure}[!h]
+        \centering
+        \includegraphics[width = .9\textwidth]{cipher_gpg2}
+        \caption{Cigrado con clave simetrica en gpg2.}
+      \end{figure}
 
     \subsection{Funciones hash}
       \par
       Se ha calculado el hash de \textit{/etc/services} con varios algorimos.
 
-      \par
-      Usar:\\
-      cp /etc/services \$HOME/services\\
-      gpg2 $--$version \hspace{10mm}y escoger uno de los algoritmos\\
-      gpg2 $--$symmetric $--$cipher-algo $<$algoritmo escogido$>$ -a \$HOME/services
-
       \begin{figure}[!h]
         \centering
-        %\includegraphics[width = .9\textwidth]{hash_md5}
+        \includegraphics[width = .9\textwidth]{gpg2hash_md5}
         \caption{Hash utilizando .}
       \end{figure}
 
       \begin{figure}[!h]
         \centering
-        %\includegraphics[width = .9\textwidth]{hash_sha1}
+        \includegraphics[width = .9\textwidth]{gpg2hash_sha1}
         \caption{Hash utilizando .}
       \end{figure}
 
       \begin{figure}[!h]
         \centering
-        %\includegraphics[width = .9\textwidth]{hash_sha256}
+        \includegraphics[width = .9\textwidth]{gpg2hash_sha256}
         \caption{Hash utilizando .}
       \end{figure}
-
-
-
-
 \end{document}

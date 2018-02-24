@@ -1,5 +1,5 @@
 \documentclass[11pt]{article}
-\usepackage[utf8]{inputenc} 
+\usepackage[utf8]{inputenc}
 
 %%% PAGE DIMENSIONS
 \usepackage{geometry}
@@ -20,6 +20,7 @@
             citecolor = blue,
             anchorcolor = blue]{hyperref}
 \usepackage[spanish]{cleveref}
+\usepackage{placeins}
 
 %%% HEADERS & FOOTERS
 \usepackage{fancyhdr}
@@ -93,7 +94,7 @@
     \subsection{Cifrado de bloque}
       \par
       Los textos generados no son iguales porque la clave de cifrado del algoritmo es distinta a pesar de que las contraseñas coincidan.
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
         \includegraphics[width = .6\textwidth]{cmp_ciphers}
         \caption{Comparación de los ficheros generados.}
@@ -103,7 +104,7 @@
       \par
       Por defecto OpenSSL utiliza salt al derivar la clave de cifrado para evitar los ataques por diccionario. Al utilizar la
       opción no salt se elimina el componente aleatorio de la clave, la salt, por lo que la misma clave da lugar al mismo texto cifrado.
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
         \includegraphics[width = .7\textwidth]{cmp_ciphers_nosalt}
         \caption{Comparación de los cifrados sin salt.}
@@ -113,32 +114,32 @@
       Al cifrar o descifrar con OpenSSL se pueden utilizar las siguientes opciones.
       \begin{itemize}
         \item \textbf{-p}: muestra la key e iv usados para cifrar/descifrar.
-              \begin{figure}[!h]
+              \begin{figure}[!ht]
                 \centering
                 \includegraphics[width = .9\textwidth]{cipher_p}
                 \caption{Cifrado utilizando la opcion -p.}
               \end{figure}
-              \begin{figure}[!h]
+              \begin{figure}[!ht]
                 \centering
                 \includegraphics[width = .9\textwidth]{dcipher_p}
                 \caption{Descifrado utilizando la opcion -p.}
               \end{figure}
         \item \textbf{-P}: muestra la key e iv generados por no se llega a cifrar/descifrar.
         \item \textbf{-pass}: si no se quiere que openSSL solicite la clave por consola se puede utilizar esta opcion para indicar el origen de la misma.
-              \begin{figure}[!h]
+              \begin{figure}[!ht]
                 \centering
                 \includegraphics[width = .9\textwidth]{cipher_pass}
                 \caption{Cifrado/descifrado utilizando la opcion -pass.}
               \end{figure}
         \item \textbf{-S}: permite especificar un salt, debe ser una cadena de digitos hexadecimales.
-              \begin{figure}[!h]
+              \begin{figure}[!ht]
                 \centering
                 \includegraphics[width = .9\textwidth]{cipher_S}
                 \caption{Cifrado/descifrado utilizando la opcion -S.}
               \end{figure}
         \item \textbf{-K}: permite especificar la key a utilizar, debe ser una cadeba de digitos hexadecimales. Obliga a utlizar tambien la opción-iv, porque el iv se genera al generar la key.
         \item \textbf{-iv}: permite especificar el iv a utilizar, debe ser una cadeba de digitos hexadecimales. Si se especifica se ignora el iv que genere el proceso de creacion de la key, salvo que se hayan utilizado opciones especiales de generacion de la key.
-              \begin{figure}[!h]
+              \begin{figure}[!ht]
                 \centering
                 \includegraphics[width = .9\textwidth]{cipher_Kiv}
                 \caption{Cifrado/descifrado utilizando las opciones -K y -iv.}
@@ -147,7 +148,7 @@
 
       \par
       El receptor recibe la salt en el propio mensaje cifrado, \cref{fig:salt}, y obtiene el iv al generar la clave con dicha salt y la contraseña privada que ha de conocer.
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
         \includegraphics[width = .9\textwidth]{salt}
         \caption{Salt en el texto cifrado.}
@@ -157,7 +158,7 @@
     \subsection{Modos de bloque}
       \par
       La diferencia es que en ecb podemos discernir los contornos de la figura y en cbc no se ve nada. Esto ocurre porque ecb no oculta los patrones del fichero origen en el fichero cifrado y cbc si.
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \begin{minipage}[c]{.5\textwidth}
           \centering
           \includegraphics[width = .8\textwidth]{tux-cbc}
@@ -175,70 +176,72 @@
       El texto en claro es \textbf{Attack at dawn}, la clave es \textbf{Secre} para el algoritmo compilado o \textbf{5365637265} para OpenSSL. Ambas claves son la misma pero a OpenSSL hay que proporcionarsela
       en hexadecimal y al compilado se le da la cadena.
 
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
-        \includegraphics[width = .9\textwidth]{cipher_rc4}
+        \includegraphics[width = \textwidth]{cipher_rc4}
         \caption{Cifrado con rc4-40.}
       \end{figure}
 
     \subsection{Funciones hash y HMAC}
       \par
-      Se ha realizado el resumen de \textit{/etc/services} que tiene un tamaño de 19Kb.
-      \begin{figure}[!h]
+      Se ha realizado el resumen de \textit{/etc/services} que tiene un tamaño de 19Kb, para ello hemos utilizado los algoritmos: md5, sha1 y sha256.
+      \begin{figure}[!ht]
         \centering
-        \includegraphics[width = .9\textwidth]{etcserv_size}
+        \includegraphics[width = .8\textwidth]{etcserv_size}
         \caption{Tamaño del fichero \textit{/etc/services}.}
       \end{figure}
 
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
         \includegraphics[width = .9\textwidth]{hash_md5}
         \caption{Hash utilizando md5.}
       \end{figure}
 
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
         \includegraphics[width = .9\textwidth]{hash_sha1}
         \caption{Hash utilizando sha1.}
       \end{figure}
 
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
         \includegraphics[width = .9\textwidth]{hash_sha256}
         \caption{Hash utilizando sha256.}
       \end{figure}
 
+      \FloatBarrier
       \bigskip
       \par
       El valor del HMAC depende de la clave utilizada y la función de hash escogidas.
       Se han obtenido los siguientes HMAC del fichero \textit{/etc/services}.
 
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
         \includegraphics[width = .9\textwidth]{hmac_md5}
         \caption{HMAC utilizando md5.}
       \end{figure}
 
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
         \includegraphics[width = .9\textwidth]{hmac_sha1}
         \caption{HMAC utilizando sha1.}
       \end{figure}
 
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
         \includegraphics[width = .9\textwidth]{hmac_sha256}
         \caption{HMAC utilizando sha256.}
       \end{figure}
 
+  \newpage
   \section{GnuPG}
     \subsection{Cifrado y descifrado}
       \par
       Se ha cifrado el fichero \textit{/etc/services} utilizado la clave seguridad con \textbf{batch mode}, modo por bloques.
-      
-      \begin{figure}[!h]
+
+      \begin{figure}[!ht]
         \centering
-        \includegraphics[width = .9\textwidth]{cipher_gpg2}
+        \includegraphics[width = \textwidth]{cipher_gpg2}
         \caption{Cigrado con clave simetrica en gpg2.}
       \end{figure}
 
@@ -246,21 +249,21 @@
       \par
       Se ha calculado el hash de \textit{/etc/services} con varios algorimos.
 
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
-        \includegraphics[width = .9\textwidth]{gpg2hash_md5}
-        \caption{Hash utilizando .}
+        \includegraphics[width = .8\textwidth]{gpg2hash_md5}
+        \caption{Hash utilizando md5.}
       \end{figure}
 
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
-        \includegraphics[width = .9\textwidth]{gpg2hash_sha1}
-        \caption{Hash utilizando .}
+        \includegraphics[width = .8\textwidth]{gpg2hash_sha1}
+        \caption{Hash utilizando sha1.}
       \end{figure}
 
-      \begin{figure}[!h]
+      \begin{figure}[!ht]
         \centering
-        \includegraphics[width = .9\textwidth]{gpg2hash_sha256}
-        \caption{Hash utilizando .}
+        \includegraphics[width = .8\textwidth]{gpg2hash_sha256}
+        \caption{Hash utilizando sha256.}
       \end{figure}
 \end{document}

@@ -21,6 +21,7 @@
             anchorcolor = blue]{hyperref}
 \usepackage[spanish]{cleveref}
 \usepackage{placeins}
+\usepackage{float}
 
 %%% HEADERS & FOOTERS
 \usepackage{fancyhdr}
@@ -93,30 +94,8 @@
   \section{OpenSSL}
     \subsection{Creacion de claves RSA, DSA, DH y EC}
       \par
-      \textbf{Comandos}\\
-      openssl genpkey -algorithm RSA -out rsakey.pem\\
-      openssl pkey -pubout -in rsakey.pem -out rsapubkey.pem\\
-      openssl pkey -in rsakey.pem -noout -text > rsakey.txt\\
-      openssl pkey -pubin -in rsapubkey.pem -noout -text > rsapubkey.txt\\
-      \vspace{2mm}
-      openssl genpkey -genparam -algorithm DSA -out dsaparam.pem\\
-      openssl genpkey -paramfile dsaparam.pem -out dsakey.pem\\
-      openssl pkey -pubout -in dsakey.pem -out dsapubkey.pem\\
-      openssl pkey -in dsakey.pem -noout -text > dsakey.txt\\
-      openssl pkey -pubin -in dsapubkey.pem -noout -text > dsapubkey.txt\\
-      \vspace{2mm}
-      openssl genpkey -genparam -algorithm DH -out dhparam.pem\\
-      openssl genpkey -paramfile dhparam.pem -out dhkey.pem\\
-      openssl pkey -pubout -in dhkey.pem -out dhpubkey.pem\\
-      openssl pkey -in dhkey.pem -noout -text > dhkey.txt\\
-      openssl pkey -pubin -in dhpubkey.pem -noout -text > dhpubkey.txt\\
-      \vspace{2mm}
-      openssl genpkey -genparam -algorithm EC -out ecparam.pem\\
-        \hspace{4mm}-pkeyopt ec\_paramgen\_curve:prime192v1\\
-      openssl genpkey -paramfile ecparam.pem -out eckey.pem\\
-      openssl pkey -pubout -in eckey.pem -out ecpubkey.pem\\
-      openssl pkey -in eckey.pem -noout -text > eckey.txt\\
-      openssl pkey -pubin -in ecpubkey.pem -noout -text > ecpubkey.txt
+      Hemos adjuntado una carpeta llamada keys que contiene las claves tanto públicas,
+      xxpubkey.txt, como privadas, xxkey.txt.
 
       \bigskip
       \par
@@ -164,115 +143,71 @@
 
     \subsection{Cifrado y descrifrado con RSA}
       \par
-      \textbf{Comandos}\\
-      openssl rand 32 -out keyfile\\
-      openssl pkeyutl -encrypt -pubin -inkey rsapubkey.pem -in keyfile -out keyfile.bin\\
-      openssl pkeyutl -decrypt -inkey rsakey.pem -in keyfile.bin $>$ keyfile2\\
-      openssl enc -des3 -pass file:keyfile -in /etc/services -out cipher.bin\\
-      openssl enc -d -des3 -pass file:keyfile2 -in cipher.bin > dcipher.txt
-
+      En la carpeta rsa se encuentra el keyfile cifrado con la clave pública de rsa, keyfile.bin,
+      y el resultado de cifrar /etc/services utilizando des3 y el keyfile, cipher.bin.
 
     \subsection{Firma y verificación con RSA, DSA y EC (ECDSA)}
       \par
       Para todas las firmas se ha empleado el algoritmo de hash sha256.
-      
-      \begin{figure}[!ht]
+
+      \FloatBarrier
+      \begin{figure}[H]
         \centering
-        %\includegraphics[width = .6\textwidth]{signs}
+        \includegraphics[width = \textwidth]{signs}
         \caption{Firmado y verificado con rsa, dsa y ec.}
       \end{figure}
 
-      \par
-      \textbf{Comandos}\\
-      openssl dgst -sha256 -sign rsakey.pem -out sigrsa /etc/services\\
-      openssl dgst -sha256 -verify rsapubkey.pem -signature sigrsa /etc/services\\
-      \vspace{2mm}
-      openssl dgst -sha256 -sign dsakey.pem -out sigdsa /etc/services\\
-      openssl dgst -sha256 -verify dsapubkey.pem -signature sigdsa /etc/services\\
-      \vspace{2mm}
-      openssl dgst -sha256 -sign eckey.pem -out sigec /etc/services\\
-      openssl dgst -sha256 -verify ecpubkey.pem -signature sigec /etc/services\\
-
-
     \subsection{Acuerdo de claves con DH y EC (ECDH)} \label{ecdh}
-    
-    \begin{figure}[!ht]
+      \par
+      En la carpeta acuerdos estan los ficheros correspondientes a las nuevas keys y los secretos
+      generados.
+
+      \begin{figure}[H]
         \centering
-        %\includegraphics[width = .6\textwidth]{AcuerdoDH}
+        \includegraphics[width = \textwidth]{AcuerdoDH}
         \caption{Acuerdo de claves con DH.}
       \end{figure}
-      
-      \begin{figure}[!ht]
+
+      \begin{figure}[H]
         \centering
-        %\includegraphics[width = .6\textwidth]{AcuerdoEC}
+        \includegraphics[width = \textwidth]{AcuerdoEC}
         \caption{Acuerdo de claves con EC.}
       \end{figure}
-    \par
-    \textbf{Comandos}\\
-    openssl genpkey -paramfile dhparam.pem -out dhkey2.pem\\
-    openssl pkey -pubout -in dhkey2.pem -out dhpubkey2.pem\\
-    openssl pkey -in dhkey2.pem -noout -text > dhkey2.txt\\
-    openssl pkey -pubin -in dhpubkey2.pem -noout -text > dhpubkey2.txt\\
-    \vspace{2mm}
-    openssl genpkey -paramfile ecparam.pem -out eckey2.pem\\
-    openssl pkey -pubout -in eckey2.pem -out ecpubkey2.pem\\
-    openssl pkey -in eckey2.pem -noout -text > eckey2.txt\\
-    openssl pkey -pubin -in ecpubkey2.pem -noout -text > ecpubkey2.txt\\
-    \vspace{2mm}
-    openssl pkeyutl -derive -inkey dhkey.pem -peerkey dhpubkey2.pem -out secret1dh\\
-    openssl pkeyutl -derive -inkey dhkey2.pem -peerkey dhpubkey.pem -out secret2dh\\
-    cmp secret1dh secret2dh\\
-    xxd secret1dh > secret1dh.txt\\
-    xxd secret2dh > secret2dh.txt\\
-    \vspace{2mm}
-    openssl pkeyutl -derive -inkey eckey.pem -peerkey ecpubkey2.pem -out secret1ec\\
-    openssl pkeyutl -derive -inkey eckey2.pem -peerkey ecpubkey.pem -out secret2ec\\
-    cmp secret1ec secret2ec\\
-    xxd secret1ec > secret1ec.txt\\
-    xxd secret2ec > secret2ec.txt
 
   \section{GnuPG}
     \subsection{Creación y gestión de claves PGP}
-      \begin{figure}[!ht]
+      \par
+      El id de la clave siempre corresponde al codigo que aparece despues de /, marcado en una de
+      las claves de la imagen.
+
+      \begin{figure}[H]
         \centering
-        %\includegraphics[width = .6\textwidth]{sring}
+        \includegraphics[width = \textwidth]{sring}
         \caption{Claves públicas del anillo.}
       \end{figure}
 
-      \begin{figure}[!ht]
+      \begin{figure}[H]
         \centering
-        %\includegraphics[width = .6\textwidth]{sring}
+        \includegraphics[width = \textwidth]{nring}
         \caption{Claves públicas del anillo tras importar.}
       \end{figure}
-
-      \par
-      \textbf{Comandos}\\
-      gpg2 $--$list-keys \hspace{10mm} Hacer captura(sring)\\
-      \vspace{2mm}
-      gpg2 $--$gen-key \hspace{10mm} Usar dos veces para crear dos claves, contraseña: seguridad\\
-      gpg2 $--$output bertoldo.gpg -a $--$export E071E8AC \hspace{10mm} Listar las keys y coger el id de una de las creadas\\
-      \vspace{2mm}
-      gpg2 $--$import pubkeyInma.gpg\\
-      gpg2 $--$list-keys \hspace{10mm} Hacer captura(nring)\\
 
     \subsection{Cifrado y descifrado}
       \par
       Hemos cifrado el fichero con la clave pública que has subido al campus.
 
-      \par
-      \textbf{Comandos}\\
-      cp /etc/services \$HOME/SeR/services\\
-      gpg2 --output services.gpg $--$encrypt $--$recipient (id de la clave de inma) -a services
-
     \subsection{Firma y verificación}
       \par
-      \textbf{Comandos}\\
-      gpg2 $--$list-keys\\
-      Probar para dos claves, una de ellas ha de ser la que hemos exportado para subir\\
-      \vspace{2mm}
-      gpg2 $--$sign --output sign(id1) -u (id1) -a $--$digest-algo sha256 /etc/services\\
-      gpg2 $--$verify sign(id1)\\
-      \vspace{2mm}
-      gpg2 $--$sign --output sign(id2) -u (id2) -a $--$digest-algo md5 /etc/services\\
-      gpg2 $--$verify sign(id2)\\
+      Como se puede ver en la captura hemos probado a cifrar con sha256, esta es la firma que
+      hemos entregado, y no hay ningún problema pero si firmamos con md5 no se puede verificar
+      porque es un algoritmo no seguro.
+
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{signverify}
+        \caption{Firma y verificacion para Bertoldo y Aparicio.}
+      \end{figure}
+
+      \par
+      El fichero gpg contiene la clave pública de Bertoldo.
 \end{document}

@@ -65,7 +65,7 @@ openssl pkcs12 -export -in usercert1.pem -inkey userkey1.pem -out usercert1.p12
 ```sh
 openssl ca -revoke usercert2.pem
 openssl ca -gencrl -out crl.pem
-openssl crl -in crl.pem -noout -text>crl.txt
+openssl crl -in crl.pem -noout -text > crl.txt
 openssl crl -CAfile demoCA /cacert.pem -in crl.pem
 openssl verify -crlcheck -CAfile demoCA/cacert.pem -CRLfile crl.pem usercert2.pem
 ```

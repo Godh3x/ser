@@ -67,7 +67,7 @@ openssl ca -revoke usercert2.pem
 openssl ca -gencrl -out crl.pem
 openssl crl -in crl.pem -noout -text > crl.txt
 openssl crl -CAfile demoCA/cacert.pem -in crl.pem
-openssl verify -crlcheck -CAfile demoCA/cacert.pem -CRLfile crl.pem usercert2.pem
+openssl verify -crl_check -CAfile demoCA/cacert.pem -CRLfile crl.pem usercert2.pem
 ```
 
 ------

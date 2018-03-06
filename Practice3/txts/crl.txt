@@ -1,0 +1,28 @@
+Certificate Revocation List (CRL):
+        Version 2 (0x1)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: /C=SP/ST=Madrid/L=Madrid/O=SER Corporation/OU=Marketing/CN=CA
+        Last Update: Mar  6 11:32:49 2018 GMT
+        Next Update: Apr  5 11:32:49 2018 GMT
+        CRL extensions:
+            X509v3 CRL Number: 
+                1
+Revoked Certificates:
+    Serial Number: 02
+        Revocation Date: Mar  6 11:32:36 2018 GMT
+    Signature Algorithm: sha256WithRSAEncryption
+         36:91:70:03:50:ad:f5:58:c1:d8:27:50:fb:0d:0a:f1:a4:37:
+         86:f9:11:f2:c4:59:ef:66:08:79:6c:7a:74:20:bc:1a:bf:85:
+         6b:6e:40:05:56:73:59:e6:99:a0:5d:0d:59:13:9a:25:d9:9f:
+         cf:e2:e9:d9:1b:b3:a0:4a:bf:49:89:1b:a8:50:40:03:5d:08:
+         98:72:b4:60:13:d2:7b:12:58:6e:2e:ee:fe:03:af:dc:05:3d:
+         ce:83:66:f0:0e:b1:46:73:40:44:32:68:f3:a3:2b:3a:4a:33:
+         74:81:fa:20:ed:3b:9d:0b:81:fb:f2:86:59:b2:1f:68:4d:4c:
+         72:40:14:fe:20:18:d6:68:60:33:67:91:8d:77:ee:59:a7:e9:
+         c2:42:00:50:29:66:d9:9f:92:90:bd:de:5b:ec:a9:c8:28:8e:
+         21:c4:32:d6:c4:3b:58:e9:3f:be:5b:f4:b5:0c:30:6f:8c:71:
+         d6:b4:d5:a6:6c:a0:18:0f:6a:c8:aa:e2:7e:ec:7c:f4:22:13:
+         7e:e0:89:b2:f5:f9:62:4e:18:9c:32:65:c0:dd:20:25:a3:12:
+         0a:f7:ad:d5:ea:70:99:48:64:90:eb:b5:b9:f5:e2:74:9f:74:
+         aa:1d:8f:46:06:a7:db:63:6b:f0:0e:80:45:7d:31:6c:df:da:
+         1b:ae:cd:8b

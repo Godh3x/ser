@@ -1,0 +1,34 @@
+/home/usuario_vms/.gnupg/pubring.gpg
+------------------------------------
+pub   1024R/DF99D131 2018-02-27
+uid    [  absoluta ] Bertoldo Perez Perez (No haré más comentarios señoria) <bertoldo@gmail.com>
+sub   1024R/E071E8AC 2018-02-27
+
+pub   2048R/1A8CD27E 2018-02-27
+uid    [  absoluta ] Aparicio Álvarez-del Caño (Javier es muy lento) <alva@gmail.com>
+sub   2048R/03324A2D 2018-02-27
+
+pub   1024R/7254F82F 2017-11-07 [caduca: 2018-11-07]
+uid    [desconocida] Inma Pardines
+sub   1024R/0D9C8170 2017-11-07 [caduca: 2018-11-07]
+
+pub   2048R/5B5D4040 2018-03-06
+uid    [  absoluta ] claveA (claveA) <claveA@mail.com>
+sub   2048R/2DDAF451 2018-03-06
+
+pub   1024R/1D4AF683 2017-11-07 [caduca: 2018-11-07]
+uid    [   total   ] claveB
+sub   1024R/F99D95F1 2017-11-07 [caduca: 2018-11-07]
+
+pub   1024R/B8205891 2017-11-07 [caduca: 2018-11-07]
+uid    [   dudosa  ] claveC
+sub   1024R/2B42A0BF 2017-11-07 [caduca: 2018-11-07]
+
+pub   1024R/41720A00 2017-11-07 [caduca: 2018-11-07]
+uid    [desconocida] claveD
+sub   1024R/3B8A48F6 2017-11-07 [caduca: 2018-11-07]
+
+pub   1024R/13302FA2 2017-11-07 [caduca: 2018-11-07]
+uid    [desconocida] claveE
+sub   1024R/AA706CE9 2017-11-07 [caduca: 2018-11-07]
+

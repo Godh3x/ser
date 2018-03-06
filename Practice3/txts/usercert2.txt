@@ -1,0 +1,59 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 2 (0x2)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=SP, ST=Madrid, L=Madrid, O=SER Corporation, OU=Marketing, CN=CA
+        Validity
+            Not Before: Mar  6 11:19:19 2018 GMT
+            Not After : Mar  6 11:19:19 2019 GMT
+        Subject: C=SP, ST=Madrid, O=SER Corporation, OU=Marketing, CN=usuario2
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:b2:40:73:a5:03:ef:59:24:c4:6c:9f:91:2d:6a:
+                    0c:3f:97:28:79:a4:47:ac:43:63:21:41:f0:f0:45:
+                    05:37:1d:c1:7c:f3:78:76:8d:4e:41:20:ce:43:9d:
+                    87:1f:29:2b:19:d9:c1:67:c1:c8:ea:df:ae:ea:d9:
+                    ee:7a:0e:f7:26:11:61:92:b2:b3:e2:93:1f:94:26:
+                    ca:9c:c9:f2:53:6c:49:db:6f:9a:de:ef:a8:50:99:
+                    4f:79:67:e6:14:2d:e9:c8:9c:2c:19:c3:2c:9b:34:
+                    60:a2:fb:eb:23:60:e0:14:39:77:4e:9e:c0:0b:4a:
+                    3c:ab:02:73:0f:e1:e0:c4:0f:ce:6c:78:4e:5c:5b:
+                    28:ff:32:c1:26:29:a4:7a:18:8c:37:62:f6:e8:7c:
+                    d0:23:2b:b1:f1:f4:1a:1b:84:04:fe:e1:fb:c0:c6:
+                    47:bf:8e:80:ed:4c:84:2c:7b:af:7b:2e:54:df:9a:
+                    c2:f3:01:40:09:28:e8:09:93:f2:b6:c1:59:f9:80:
+                    5b:bb:60:31:b6:fb:64:84:e4:f0:9b:cb:9d:2e:3f:
+                    15:13:b0:e2:56:95:de:5f:8c:34:cc:79:5f:81:ea:
+                    13:97:8e:27:57:d4:5b:0d:0a:b7:be:ab:87:70:f0:
+                    ea:13:6a:35:b2:7f:27:3a:d9:69:1f:3b:3b:c2:8e:
+                    8e:ab
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Comment: 
+                OpenSSL Generated Certificate
+            X509v3 Subject Key Identifier: 
+                85:F3:94:0A:04:6F:F9:41:0B:F4:9D:AA:F8:1F:91:D6:F2:B9:ED:52
+            X509v3 Authority Key Identifier: 
+                keyid:84:67:A3:00:F4:8A:C5:AF:95:71:58:BD:8E:01:80:20:2B:C3:6C:74
+
+    Signature Algorithm: sha256WithRSAEncryption
+         97:36:db:0f:55:63:34:d7:0f:4c:9a:0c:2a:d6:89:c7:fd:47:
+         ae:e5:a0:fe:26:6b:af:a8:62:f3:e2:c0:32:32:3c:91:10:74:
+         a3:8a:64:be:9b:df:29:a7:14:e7:bb:9c:18:b5:53:87:b4:95:
+         42:25:21:e8:96:93:34:a3:14:15:dd:db:e4:ea:97:17:fa:00:
+         db:14:48:50:58:6b:c8:27:b2:1e:4a:87:20:6c:e9:6c:3c:b0:
+         49:4c:a6:c0:21:31:ba:27:86:5c:ac:d0:3f:73:1a:ee:98:14:
+         18:ce:89:89:21:84:13:b1:5b:82:79:34:02:a0:75:3c:9e:6e:
+         8e:0a:75:ea:21:d2:5d:37:9d:60:f1:01:92:02:17:ce:48:d8:
+         c8:8a:43:70:85:89:b8:29:1e:ff:2e:cc:48:d5:bc:2e:b2:a6:
+         1d:07:4d:eb:47:92:e2:1d:b6:c9:11:21:e0:f7:98:57:2a:56:
+         0e:62:59:73:d0:2d:25:c7:73:ba:f4:3b:21:fb:e4:1b:0a:05:
+         81:a2:dc:df:93:63:02:69:3b:df:fb:13:03:05:26:a8:eb:a1:
+         25:bd:7a:ba:a4:41:5e:15:14:ba:4b:e7:b4:e7:4b:ad:a8:e0:
+         49:9d:d0:ce:f3:3c:d3:27:a5:86:25:5f:69:08:a2:45:89:b2:
+         be:4d:9b:d4

@@ -1,0 +1,2 @@
+V	190306111822Z		01	unknown	/C=SP/ST=Madrid/O=SER Corporation/OU=Marketing/CN=usuario1
+R	190306111919Z	180306113236Z	02	unknown	/C=SP/ST=Madrid/O=SER Corporation/OU=Marketing/CN=usuario2

@@ -1,0 +1,6 @@
+gpg: 3 dudosa(s) necesarias, 1 completa(s) necesarias,
+modelo de confianza PGP
+gpg: nivel: 0  validez:   3  firmada:   3  confianza: 0-, 0q, 0n, 0m, 0f, 3u
+gpg: nivel: 1  validez:   3  firmada:   1  confianza: 0-, 0q, 0n, 3m, 0f, 0u
+gpg: nivel: 2  validez:   1  firmada:   0  confianza: 0-, 1q, 0n, 0m, 0f, 0u
+gpg: siguiente comprobación de base de datos de confianza el: 2018-11-07

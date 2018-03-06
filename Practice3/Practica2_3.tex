@@ -97,11 +97,16 @@
       Si intentamos utilizar otros directorios dará error a no ser que se modifique el fichero de
       configuración, concretamente los datos de la sección [CA\_default].
 
+      \bigskip
       \par
       La clave privada se ha almacenado en \textit{demoCA/private/cakey.pem} y el certificado en
       \textit{demoCA/cacert.pem}. Como hemos empleado la opción -new la clave generada es de tipo
       RSA y su tamaño viene especificado en el fichero de configuracion, valor de default\_bits
       en la sección [req], por defecto son 2048 bits.
+
+      \bigskip
+      \par
+      Los ficheros de este apartado están en la carpeta \textit{ca},
 
     \subsection{Creación de solicitudes de firma de certificado}
       \par
@@ -109,17 +114,34 @@
       en nuestro caso hemos empleado la opción -new que crea una clave rsa nueva y la ha almacenado
       en userkey1.pem y userkey2.pem, también podriamos haber utilizado una que tuvieramos
       previamente con la opción -key.
-      
+
       \bigskip
       \par
-      El certificado contiene los datos que identifican al usuario solicitante, incluida su clave pública.
-
-    \subsection{Creación y verificación de certificados}
+      El certificado contiene los datos que identifican al usuario solicitante, incluida
+      su clave pública. Puede verse en los ficheros de la carpeta \textit{csr}
 
     \subsection{Consulta y manipulación de certificados}
-      TODO: copiar txts asociados
+      \par
+      La información de los certificados se puede ver en los ficheros de la carpeta \textit{certs}. Los
+      certificados usan la version 3.
+
+      \bigskip
+      \par
+      En un certificado van todos los datos del poseedor del certificado, Subject, junto con la
+      validez del mismo.
+
+      \bigskip
+      \par
+      Si se quiere comprobar si el poseedor es una CA basta con ver el common name del Subject,
+      x509 también añade un campo Basic Constraints en los certificados que no son de CA con el
+      valor CA:FALSE.
 
     \subsection{Revocación de certificados}
+      \par
+      La crl está en la carpeta \textit{revocacion}.
+
+
+      \bigskip
       \par
       Hay un certificado revocado con serial number 02, corresponde a usercert2, lo ha revocado la CA que
       es quien ha creado el crl, campo Issuer. El CRL es válido porque la CA lo ha firmado.
@@ -129,24 +151,28 @@
       \par
       En los check-trust y validity aparecen claves 2 extra, con nivel ultimate, que corresponden a las dos que generamos en
       la práctica anterior. Tambien está en el anillo la clave pública que subiste el otro día, tiene confianza desconocida.
-      
+
+      \bigskip
+      \par
+      Todos los ficheros están en la carpeta \textit{trust}.
+
       \bigskip
       \par
       C será valida porque aunque desconocemos la validez de C sí conocemos la de B, y nos
-      fiamos de ella, y la clave C ha sido firmada por B.
-      TODO: copiar txts asociados
+      fiamos de ella, y la clave C ha sido firmada por B.\\
+      Ficheros \textit{checktrustdb.txt} y \textit{validity.txt}.
 
       \bigskip
       \par
       En el segundo caso C no será válida porque B es dudosa y para validar una clave con firmas
       dudosas son necesarias al menos 3, también debe cumplir que el camino que lleva hasta nuestra
       firma es menor de 5, como hemos firmado B con la clave A esto se cumple pero estas condiciones
-      no son excluyentes.
-      TODO: copiar txts asociados
+      no son excluyentes.\\
+      Ficheros \textit{checktrustdb2.txt} y \textit{validity2.txt}.
 
       \bigskip
       \par
       Ahora C vuelve a ser válida porque como hemos explicado antes ha sido firmada por 3 claves
-      dudosas (B, D y E) y además el camino a nuestra clave es menor de 5.
-      TODO: copiar txts asociados
+      dudosas (B, D y E) y además el camino a nuestra clave es menor de 5.\\
+      Ficheros \textit{checktrustdb3.txt} y \textit{validity3.txt}.
     \end{document}

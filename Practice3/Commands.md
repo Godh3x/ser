@@ -78,27 +78,27 @@ openssl verify -crl_check -CAfile demoCA/cacert.pem -CRLfile crl.pem usercert2.p
 ```sh
 gpg2 --gen-key       //nombre: claveA, psw: seguridad
 gpg2 --import pubkeysSER.gpg
-gpg2 --sign-key --local-user idA idB
-gpg2 --sign-key --local-user idB idC
-gpg2 --edit-key idB trust quit      //Nivel 4
-gpg2 --edit-key idC trust quit      //Nivel 1
+gpg2 --sign-key --local-user 2DDAF451 F99D95F1
+gpg2 --sign-key --local-user F99D95F1 2B42A0BF
+gpg2 --edit-key F99D95F1 trust quit      //Nivel 4
+gpg2 --edit-key 2B42A0BF trust quit      //Nivel 1
 gpg2 --check-trustdb > checktrustdb.txt
 gpg2 --list-options show-uid-validity –list-keys > validity.txt
 ```
 
 ```sh
-gpg2 --edit-key idB trust quit       //Nivel 3
+gpg2 --edit-key F99D95F1 trust quit       //Nivel 3
 gpg2 --check-trustdb > checktrustdb2.txt
 gpg2 --list-options show-uid-validity –list-keys > validity2.txt
 ```
 
 ```sh
-gpg2 --sign-key --local-user idA idD
-gpg2 --sign-key --local-user idA idE
-gpg2 --edit-key idD trust quit      //Nivel 3
-gpg2 --edit-key idE trust quit      //Nivel 3
-gpg2 --sign-key --local-user idD idC
-gpg2 --sign-key --local-user idE idC
+gpg2 --sign-key --local-user 2DDAF451 3B8A48F6
+gpg2 --sign-key --local-user 2DDAF451 AA706CE9
+gpg2 --edit-key 3B8A48F6 trust quit      //Nivel 3
+gpg2 --edit-key AA706CE9 trust quit      //Nivel 3
+gpg2 --sign-key --local-user 3B8A48F6 2B42A0BF
+gpg2 --sign-key --local-user AA706CE9 2B42A0BF
 gpg2 --check-trustdb > checktrustdb3.txt
 gpg2 --list-options show-uid-validity –list-keys > validity3.txt
 ```

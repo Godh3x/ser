@@ -23,7 +23,7 @@ openssl req -x509 -new -days 3650 -keyout demoCA/private/cakey.pem -out demoCA/c
 
 ```sh
 openssl req -new -keyout userkey1.pem -out usercsr1.pem     //CN: usuario1
-openssl req -in usercsr1.pem -noout -text>usercsr1.txt
+openssl req -in usercsr1.pem -noout -text > usercsr1.txt
 openssl req -verify -in usercsr1.pem
 openssl req -new -keyout userkey2.pem -out usercsr2.pem     //CN: usuario2
 openssl req -in usercsr2.pem -noout -text > usercsr2.txt
@@ -48,7 +48,7 @@ openssl x509 -in usercert1.pem -noout -text > usercert1.txt
 openssl x509 -in usercert1.pem -noout -pubkey > usercert1pubkey.txt
 openssl x509 -in usercert2.pem -noout -text > usercert2.txt
 openssl x509 -in usercert2.pem -noout -pubkey > usercert2pubkey.txt
-openssl x509 -indemoCA/cacert.pem -noout -text  cacert.txt
+openssl x509 -in demoCA/cacert.pem -noout -text  cacert.txt
 openssl x509 -in demoCA/cacert.pem -noout -pubkey > cacertpubkey.txt
 ```
 

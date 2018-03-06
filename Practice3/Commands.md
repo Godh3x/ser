@@ -82,13 +82,13 @@ gpg2 --sign-key --local-user 2DDAF451 F99D95F1
 gpg2 --sign-key --local-user F99D95F1 2B42A0BF
 gpg2 --edit-key F99D95F1 trust quit      //Nivel 4
 gpg2 --edit-key 2B42A0BF trust quit      //Nivel 1
-gpg2 --check-trustdb > checktrustdb.txt
+gpg2 --check-trustdb 2> checktrustdb.txt
 gpg2 --list-options show-uid-validity –list-keys > validity.txt
 ```
 
 ```sh
 gpg2 --edit-key F99D95F1 trust quit       //Nivel 3
-gpg2 --check-trustdb > checktrustdb2.txt
+gpg2 --check-trustdb 2> checktrustdb2.txt
 gpg2 --list-options show-uid-validity –list-keys > validity2.txt
 ```
 
@@ -99,6 +99,6 @@ gpg2 --edit-key 3B8A48F6 trust quit      //Nivel 3
 gpg2 --edit-key AA706CE9 trust quit      //Nivel 3
 gpg2 --sign-key --local-user 3B8A48F6 2B42A0BF
 gpg2 --sign-key --local-user AA706CE9 2B42A0BF
-gpg2 --check-trustdb > checktrustdb3.txt
+gpg2 --check-trustdb 2> checktrustdb3.txt
 gpg2 --list-options show-uid-validity –list-keys > validity3.txt
 ```

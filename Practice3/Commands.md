@@ -48,7 +48,7 @@ openssl x509 -in usercert1.pem -noout -text > usercert1.txt
 openssl x509 -in usercert1.pem -noout -pubkey > usercert1pubkey.txt
 openssl x509 -in usercert2.pem -noout -text > usercert2.txt
 openssl x509 -in usercert2.pem -noout -pubkey > usercert2pubkey.txt
-openssl x509 -in demoCA/cacert.pem -noout -text  cacert.txt
+openssl x509 -in demoCA/cacert.pem -noout -text > cacert.txt
 openssl x509 -in demoCA/cacert.pem -noout -pubkey > cacertpubkey.txt
 ```
 

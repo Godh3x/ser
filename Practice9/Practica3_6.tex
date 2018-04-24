@@ -344,7 +344,8 @@ Last login: Sat Apr 21 19:29:26 2018
 
     \subsection{Reenvío de puertos}
       \par
-      \textbf{ssh -v -N -L 8080:www.ucm.es:80 usuario@192.168.1.2}
+      \textbf{ssh -v -N -L 8080:www.ucm.es:80 usuario@192.168.1.2}, se ha conetado a la pagina principal
+      de la complutense.
 
 \begin{lstlisting}
 OpenSSH_6.0p1 Debian-4+deb7u7, OpenSSL 1.0.1e 11 Feb 2013
@@ -352,7 +353,9 @@ debug1: Reading configuration data /etc/ssh/ssh_config
 debug1: /etc/ssh/ssh_config line 19: Applying options for *
 debug1: Connecting to 192.168.1.2 [192.168.1.2] port 22.
 debug1: Connection established.
-debug1: identity file /home/usuario/.ssh/id_rsa type -1
+debug1: identity file /home/usuario/.ssh/id_rsa type 1
+debug1: Checking blacklist file /usr/share/ssh/blacklist.RSA-2048
+debug1: Checking blacklist file /etc/ssh/blacklist.RSA-2048
 debug1: identity file /home/usuario/.ssh/id_rsa-cert type -1
 debug1: identity file /home/usuario/.ssh/id_dsa type -1
 debug1: identity file /home/usuario/.ssh/id_dsa-cert type -1
@@ -368,11 +371,9 @@ debug1: kex: server->client aes128-ctr hmac-md5 none
 debug1: kex: client->server aes128-ctr hmac-md5 none
 debug1: sending SSH2_MSG_KEX_ECDH_INIT
 debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
-debug1: Server host key: ECDSA c5:9d:97:b8:6e:87:e4:e3:cc:ec:3b:a8:bc:9e:8b:12
-The authenticity of host '192.168.1.2 (192.168.1.2)' can't be established.
-ECDSA key fingerprint is c5:9d:97:b8:6e:87:e4:e3:cc:ec:3b:a8:bc:9e:8b:12.
-Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added '192.168.1.2' (ECDSA) to the list of known hosts.
+debug1: Server host key: ECDSA 1e:e7:42:e9:cf:c3:58:78:63:21:71:fa:15:9d:30:fa
+debug1: Host '192.168.1.2' is known and matches the ECDSA host key.
+debug1: Found key in /home/usuario/.ssh/known_hosts:1
 debug1: ssh_ecdsa_verify: signature correct
 debug1: SSH2_MSG_NEWKEYS sent
 debug1: expecting SSH2_MSG_NEWKEYS
@@ -381,12 +382,13 @@ debug1: SSH2_MSG_SERVICE_REQUEST sent
 debug1: SSH2_MSG_SERVICE_ACCEPT received
 debug1: Authentications that can continue: publickey,password
 debug1: Next authentication method: publickey
-debug1: Trying private key: /home/usuario/.ssh/id_rsa
-debug1: Trying private key: /home/usuario/.ssh/id_dsa
-debug1: Trying private key: /home/usuario/.ssh/id_ecdsa
-debug1: Next authentication method: password
-usuario@192.168.1.2's password:
-debug1: Authentication succeeded (password).
+debug1: Offering RSA public key: /home/usuario/.ssh/id_rsa
+debug1: Server accepts key: pkalg ssh-rsa blen 279
+debug1: key_parse_private_pem: PEM_read_PrivateKey failed
+debug1: read PEM private key done: type <unknown>
+Enter passphrase for key '/home/usuario/.ssh/id_rsa': 
+debug1: read PEM private key done: type RSA
+debug1: Authentication succeeded (publickey).
 Authenticated to 192.168.1.2 ([192.168.1.2]:22).
 debug1: Local connections to LOCALHOST:8080 forwarded to remote address www.ucm.es:80
 debug1: Local forwarding listening on ::1 port 8080.
@@ -395,36 +397,128 @@ debug1: Local forwarding listening on 127.0.0.1 port 8080.
 debug1: channel 1: new [port listener]
 debug1: Requesting no-more-sessions@openssh.com
 debug1: Entering interactive session.
+debug1: Connection to port 8080 forwarding to www.ucm.es port 80 requested.
+debug1: channel 2: new [direct-tcpip]
+debug1: Connection to port 8080 forwarding to www.ucm.es port 80 requested.
+debug1: channel 3: new [direct-tcpip]
+debug1: Connection to port 8080 forwarding to www.ucm.es port 80 requested.
+debug1: channel 4: new [direct-tcpip]
+debug1: Connection to port 8080 forwarding to www.ucm.es port 80 requested.
+debug1: channel 5: new [direct-tcpip]
+debug1: Connection to port 8080 forwarding to www.ucm.es port 80 requested.
+debug1: channel 6: new [direct-tcpip]
+debug1: Connection to port 8080 forwarding to www.ucm.es port 80 requested.
+debug1: channel 7: new [direct-tcpip]
 \end{lstlisting}
 
       \bigskip
       \par
       \textbf{ssh -v -X -R 8080:www.ucm.es:80 usuario@192.168.1.2 chromium}\\
-      Da un fallo al abrir chromium por lo que no hemos podido verlo pero
-      suponemos que la interfaz se abrira en lef, la que ejecuta el comando. El
-      puerto 8080 que esta escuchando es el de right.
+      Se abre en left el programa, en este caso chromium, por ser la que ejecuta el comando. El
+      puerto 8080 que está escuchando es el de right.
 
 \begin{lstlisting}
-debug1: Authentication succeeded (password).
+OpenSSH_6.0p1 Debian-4+deb7u7, OpenSSL 1.0.1e 11 Feb 2013
+debug1: Reading configuration data /etc/ssh/ssh_config
+debug1: /etc/ssh/ssh_config line 19: Applying options for *
+debug1: Connecting to 192.168.1.2 [192.168.1.2] port 22.
+debug1: Connection established.
+debug1: identity file /home/usuario/.ssh/id_rsa type 1
+debug1: Checking blacklist file /usr/share/ssh/blacklist.RSA-2048
+debug1: Checking blacklist file /etc/ssh/blacklist.RSA-2048
+debug1: identity file /home/usuario/.ssh/id_rsa-cert type -1
+debug1: identity file /home/usuario/.ssh/id_dsa type -1
+debug1: identity file /home/usuario/.ssh/id_dsa-cert type -1
+debug1: identity file /home/usuario/.ssh/id_ecdsa type -1
+debug1: identity file /home/usuario/.ssh/id_ecdsa-cert type -1
+debug1: Remote protocol version 2.0, remote software version OpenSSH_6.0p1 Debian-4+deb7u7
+debug1: match: OpenSSH_6.0p1 Debian-4+deb7u7 pat OpenSSH*
+debug1: Enabling compatibility mode for protocol 2.0
+debug1: Local version string SSH-2.0-OpenSSH_6.0p1 Debian-4+deb7u7
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: server->client aes128-ctr hmac-md5 none
+debug1: kex: client->server aes128-ctr hmac-md5 none
+debug1: sending SSH2_MSG_KEX_ECDH_INIT
+debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
+debug1: Server host key: ECDSA 1e:e7:42:e9:cf:c3:58:78:63:21:71:fa:15:9d:30:fa
+debug1: Host '192.168.1.2' is known and matches the ECDSA host key.
+debug1: Found key in /home/usuario/.ssh/known_hosts:1
+debug1: ssh_ecdsa_verify: signature correct
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: SSH2_MSG_SERVICE_REQUEST sent
+debug1: SSH2_MSG_SERVICE_ACCEPT received
+debug1: Authentications that can continue: publickey,password
+debug1: Next authentication method: publickey
+debug1: Offering RSA public key: /home/usuario/.ssh/id_rsa
+debug1: Server accepts key: pkalg ssh-rsa blen 279
+debug1: key_parse_private_pem: PEM_read_PrivateKey failed
+debug1: read PEM private key done: type <unknown>
+Enter passphrase for key '/home/usuario/.ssh/id_rsa': 
+debug1: read PEM private key done: type RSA
+debug1: Authentication succeeded (publickey).
 Authenticated to 192.168.1.2 ([192.168.1.2]:22).
-debug1: Remote connections from LOCALHOST:8080 forwarded to local address
-  www.ucm.es:80
+debug1: Remote connections from LOCALHOST:8080 forwarded to local address www.ucm.es:80
 debug1: channel 0: new [client-session]
 debug1: Requesting no-more-sessions@openssh.com
 debug1: Entering interactive session.
 debug1: remote forward success for: listen 8080, connect www.ucm.es:80
 debug1: All remote forwarding requests processed
+debug1: Requesting X11 forwarding with authentication spoofing.
 debug1: Sending environment.
 debug1: Sending env LANG = es_ES.UTF-8
 debug1: Sending command: chromium
-[3460:3460:0421/213125:ERROR:browser_main_loop.cc(207)] Gtk: cannot open
-  display:
-debug1: client_input_channel_req: channel 0 rtype exit-status reply 0
-debug1: client_input_channel_req: channel 0 rtype eow@openssh.com reply 0
-debug1: channel 0: free: client-session, nchannels 1
-Transferred: sent 1880, received 1728 bytes, in 0.0 seconds
-Bytes per second: sent 48793.0, received 44848.0
-debug1: Exit status 1
+debug1: client_input_channel_open: ctype x11 rchan 5 win 65536 max 16384
+debug1: client_request_x11: request from ::1 41802
+debug1: channel 1: new [x11]
+debug1: confirm x11
+debug1: client_input_channel_open: ctype x11 rchan 6 win 65536 max 16384
+debug1: client_request_x11: request from ::1 41803
+debug1: channel 2: new [x11]
+debug1: confirm x11
+debug1: client_input_channel_open: ctype x11 rchan 7 win 65536 max 16384
+debug1: client_request_x11: request from ::1 41804
+debug1: channel 3: new [x11]
+debug1: confirm x11
+OpenGL Warning: Failed to connect to host. Make sure 3D acceleration is enabled for this VM.
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 8 win 2097152 max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37157
+debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=10
+debug1: channel 4: new [::1]
+debug1: confirm forwarded-tcpip
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 9 win 2097152 max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37158
+debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=11
+debug1: channel 5: new [::1]
+debug1: confirm forwarded-tcpip
+debug1: channel 4: connected to www.ucm.es port 80
+debug1: channel 5: connected to www.ucm.es port 80
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 10 win 2097152 max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37159
+debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=12
+debug1: channel 6: new [::1]
+debug1: confirm forwarded-tcpip
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 11 win 2097152 max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37160
+debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=13
+debug1: channel 7: new [::1]
+debug1: confirm forwarded-tcpip
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 12 win 2097152 max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37161
+debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=14
+debug1: channel 8: new [::1]
+debug1: confirm forwarded-tcpip
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 13 win 2097152 max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37162
+debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=15
+debug1: channel 9: new [::1]
+debug1: confirm forwarded-tcpip
+debug1: channel 6: connected to www.ucm.es port 80
+debug1: channel 7: connected to www.ucm.es port 80
+debug1: channel 8: connected to www.ucm.es port 80
+debug1: channel 9: connected to www.ucm.es port 80
 \end{lstlisting}
 
       \bigskip
@@ -434,16 +528,121 @@ debug1: Exit status 1
       hace de proxy.
 
 \begin{lstlisting}
-debug1: Authentication succeeded (password).
+OpenSSH_6.0p1 Debian-4+deb7u7, OpenSSL 1.0.1e 11 Feb 2013
+debug1: Reading configuration data /etc/ssh/ssh_config
+debug1: /etc/ssh/ssh_config line 19: Applying options for *
+debug1: Connecting to 192.168.1.2 [192.168.1.2] port 22.
+debug1: Connection established.
+debug1: identity file /home/usuario/.ssh/id_rsa type 1
+debug1: Checking blacklist file /usr/share/ssh/blacklist.RSA-2048
+debug1: Checking blacklist file /etc/ssh/blacklist.RSA-2048
+debug1: identity file /home/usuario/.ssh/id_rsa-cert type -1
+debug1: identity file /home/usuario/.ssh/id_dsa type -1
+debug1: identity file /home/usuario/.ssh/id_dsa-cert type -1
+debug1: identity file /home/usuario/.ssh/id_ecdsa type -1
+debug1: identity file /home/usuario/.ssh/id_ecdsa-cert type -1
+debug1: Remote protocol version 2.0, remote software version OpenSSH_6.0p1 Debian-4+deb7u7
+debug1: match: OpenSSH_6.0p1 Debian-4+deb7u7 pat OpenSSH*
+debug1: Enabling compatibility mode for protocol 2.0
+debug1: Local version string SSH-2.0-OpenSSH_6.0p1 Debian-4+deb7u7
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: server->client aes128-ctr hmac-md5 none
+debug1: kex: client->server aes128-ctr hmac-md5 none
+debug1: sending SSH2_MSG_KEX_ECDH_INIT
+debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
+debug1: Server host key: ECDSA 1e:e7:42:e9:cf:c3:58:78:63:21:71:fa:15:9d:30:fa
+debug1: Host '192.168.1.2' is known and matches the ECDSA host key.
+debug1: Found key in /home/usuario/.ssh/known_hosts:1
+debug1: ssh_ecdsa_verify: signature correct
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: SSH2_MSG_SERVICE_REQUEST sent
+debug1: SSH2_MSG_SERVICE_ACCEPT received
+debug1: Authentications that can continue: publickey,password
+debug1: Next authentication method: publickey
+debug1: Offering RSA public key: /home/usuario/.ssh/id_rsa
+debug1: Server accepts key: pkalg ssh-rsa blen 279
+debug1: key_parse_private_pem: PEM_read_PrivateKey failed
+debug1: read PEM private key done: type <unknown>
+Enter passphrase for key '/home/usuario/.ssh/id_rsa': 
+debug1: read PEM private key done: type RSA
+debug1: Authentication succeeded (publickey).
 Authenticated to 192.168.1.2 ([192.168.1.2]:22).
-debug1: Local connections to LOCALHOST:1080 forwarded to remote address
-  socks:0
+debug1: Local connections to LOCALHOST:1080 forwarded to remote address socks:0
 debug1: Local forwarding listening on ::1 port 1080.
 debug1: channel 0: new [port listener]
 debug1: Local forwarding listening on 127.0.0.1 port 1080.
 debug1: channel 1: new [port listener]
 debug1: Requesting no-more-sessions@openssh.com
 debug1: Entering interactive session.
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 2: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 3: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 4: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 5: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 6: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 7: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 8: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 9: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 10: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 11: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 12: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 13: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 14: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 15: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 16: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 17: new [dynamic-tcpip]
+channel 15: open failed: administratively prohibited: open failed
+debug1: channel 15: free: direct-tcpip: listening port 1080 for xcsvmqbwrjy port 80, connect from ::1 port 51147, nchannels 18
+channel 16: open failed: administratively prohibited: open failed
+channel 17: open failed: administratively prohibited: open failed
+debug1: channel 16: free: direct-tcpip: listening port 1080 for kpkchnuhbfv port 80, connect from ::1 port 51148, nchannels 17
+debug1: channel 17: free: direct-tcpip: listening port 1080 for urhtjlxedlzo port 80, connect from ::1 port 51149, nchannels 16
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 15: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 16: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 17: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 18: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 19: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 20: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 21: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 22: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 23: new [dynamic-tcpip]
+debug1: Connection to port 1080 forwarding to socks port 0 requested.
+debug1: channel 24: new [dynamic-tcpip]
+debug1: channel 8: free: direct-tcpip: listening port 1080 for www.google.es port 443, connect from ::1 port 51140, nchannels 25
+debug1: channel 9: free: direct-tcpip: listening port 1080 for www.google.es port 443, connect from ::1 port 51141, nchannels 24
+debug1: channel 10: free: direct-tcpip: listening port 1080 for www.google.es port 443, connect from ::1 port 51142, nchannels 23
+debug1: channel 11: free: direct-tcpip: listening port 1080 for www.google.es port 443, connect from ::1 port 51143, nchannels 22
+debug1: channel 4: free: direct-tcpip: listening port 1080 for apis.google.com port 443, connect from ::1 port 51136, nchannels 21
+debug1: channel 5: free: direct-tcpip: listening port 1080 for ssl.gstatic.com port 443, connect from ::1 port 51137, nchannels 20
+debug1: channel 6: free: direct-tcpip: listening port 1080 for ssl.gstatic.com port 443, connect from ::1 port 51138, nchannels 19
+debug1: channel 12: free: direct-tcpip: listening port 1080 for www.gstatic.com port 443, connect from ::1 port 51144, nchannels 18
 \end{lstlisting}
 
 \end{document}

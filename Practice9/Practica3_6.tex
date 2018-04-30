@@ -98,12 +98,15 @@
 \begin{lstlisting}
 Tue Apr 24 12:11:50 2018 us=815937   shared_secret_file = 'static.key'
 Tue Apr 24 12:11:50 2018 us=860926 Local Options hash (VER=V4): '8addc3e6'
-Tue Apr 24 12:11:50 2018 us=860938 Expected Remote Options hash (VER=V4): '04a219ce'
+Tue Apr 24 12:11:50 2018 us=860938 Expected Remote Options hash (VER=V4):
+  '04a219ce'
 Tue Apr 24 12:11:50 2018 us=860950 UDPv4 link local (bound): [undef]
 Tue Apr 24 12:11:50 2018 us=860958 UDPv4 link remote: [AF_INET]192.168.1.1:1194
-^[[1;5CTue Apr 24 12:11:59 2018 us=856274 Peer Connection Initiated with [AF_INET]192.168.1.1:1194
+^[[1;5CTue Apr 24 12:11:59 2018 us=856274 Peer Connection Initiated with
+  [AF_INET]192.168.1.1:1194
 Tue Apr 24 12:12:00 2018 us=923036 Initialization Sequence Completed
-^CTue Apr 24 12:18:53 2018 us=251659 event_wait : Interrupted system call (code=4)
+^CTue Apr 24 12:18:53 2018 us=251659 event_wait : Interrupted system call
+  (code=4)
 Tue Apr 24 12:18:53 2018 us=251728 TCP/UDP: Closing socket
 Tue Apr 24 12:18:53 2018 us=251761 Closing TUN/TAP interface
 Tue Apr 24 12:18:53 2018 us=251787 /sbin/ifconfig tun0 0.0.0.0
@@ -138,7 +141,9 @@ Tue Apr 24 12:18:53 2018 us=264076 SIGINT[hard,] received, process exiting
     \subsection{TLS con certificados}
     \par
     Salida del comando:\\
-    sudo openvpn --remote 192.168.1.1 --dev tun --ifconfig 10.4.0.2 10.4.0.1 --tls-server --dh dh1024.pem --ca ca.crt --cert server.crt --key server.key --verb 4
+    sudo openvpn --remote 192.168.1.1 --dev tun --ifconfig 10.4.0.2 10.4.0.1
+    --tls-server --dh dh1024.pem --ca ca.crt --cert server.crt --key server.key
+    --verb 4
 
 \begin{lstlisting}
 Sat Apr 21 20:07:46 2018 us=825293 Diffie-Hellman initialized with
@@ -344,11 +349,11 @@ Last login: Sat Apr 21 19:29:26 2018
 
     \subsection{Reenvío de puertos}
       \par
-      \textbf{ssh -v -N -L 8080:www.ucm.es:80 usuario@192.168.1.2}, se ha conetado a la pagina principal
-      de la complutense.
+      \textbf{ssh -v -N -L 8080:www.ucm.es:80 usuario@192.168.1.2}, se ha
+      conetado a la pagina principal de la complutense.
 
 \begin{lstlisting}
-Enter passphrase for key '/home/usuario/.ssh/id_rsa': 
+Enter passphrase for key '/home/usuario/.ssh/id_rsa':
 debug1: read PEM private key done: type RSA
 debug1: Authentication succeeded (publickey).
 Authenticated to 192.168.1.2 ([192.168.1.2]:22).
@@ -376,15 +381,16 @@ debug1: channel 7: new [direct-tcpip]
       \bigskip
       \par
       \textbf{ssh -v -X -R 8080:www.ucm.es:80 usuario@192.168.1.2 chromium}\\
-      Se abre en left el programa, en este caso chromium, por ser la que ejecuta el comando. El
-      puerto 8080 que está escuchando es el de right.
+      Se abre en left el programa, en este caso chromium, por ser la que ejecuta
+      el comando. El puerto 8080 que está escuchando es el de right.
 
 \begin{lstlisting}
-Enter passphrase for key '/home/usuario/.ssh/id_rsa': 
+Enter passphrase for key '/home/usuario/.ssh/id_rsa':
 debug1: read PEM private key done: type RSA
 debug1: Authentication succeeded (publickey).
 Authenticated to 192.168.1.2 ([192.168.1.2]:22).
-debug1: Remote connections from LOCALHOST:8080 forwarded to local address www.ucm.es:80
+debug1: Remote connections from LOCALHOST:8080 forwarded to local address
+  www.ucm.es:80
 debug1: channel 0: new [client-session]
 debug1: Requesting no-more-sessions@openssh.com
 debug1: Entering interactive session.
@@ -406,36 +412,49 @@ debug1: client_input_channel_open: ctype x11 rchan 7 win 65536 max 16384
 debug1: client_request_x11: request from ::1 41804
 debug1: channel 3: new [x11]
 debug1: confirm x11
-OpenGL Warning: Failed to connect to host. Make sure 3D acceleration is enabled for this VM.
-debug1: client_input_channel_open: ctype forwarded-tcpip rchan 8 win 2097152 max 32768
-debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37157
+OpenGL Warning: Failed to connect to host. Make sure 3D acceleration is enabled
+  for this VM.
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 8 win 2097152
+  max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator
+  ::1 port 37157
 debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=10
 debug1: channel 4: new [::1]
 debug1: confirm forwarded-tcpip
-debug1: client_input_channel_open: ctype forwarded-tcpip rchan 9 win 2097152 max 32768
-debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37158
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 9 win 2097152
+  max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator
+  ::1 port 37158
 debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=11
 debug1: channel 5: new [::1]
 debug1: confirm forwarded-tcpip
 debug1: channel 4: connected to www.ucm.es port 80
 debug1: channel 5: connected to www.ucm.es port 80
-debug1: client_input_channel_open: ctype forwarded-tcpip rchan 10 win 2097152 max 32768
-debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37159
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 10 win 2097152
+  max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator
+  ::1 port 37159
 debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=12
 debug1: channel 6: new [::1]
 debug1: confirm forwarded-tcpip
-debug1: client_input_channel_open: ctype forwarded-tcpip rchan 11 win 2097152 max 32768
-debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37160
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 11 win 2097152
+  max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator
+  ::1 port 37160
 debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=13
 debug1: channel 7: new [::1]
 debug1: confirm forwarded-tcpip
-debug1: client_input_channel_open: ctype forwarded-tcpip rchan 12 win 2097152 max 32768
-debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37161
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 12 win 2097152
+  max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator
+  ::1 port 37161
 debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=14
 debug1: channel 8: new [::1]
 debug1: confirm forwarded-tcpip
-debug1: client_input_channel_open: ctype forwarded-tcpip rchan 13 win 2097152 max 32768
-debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator ::1 port 37162
+debug1: client_input_channel_open: ctype forwarded-tcpip rchan 13 win 2097152
+  max 32768
+debug1: client_request_forwarded_tcpip: listen localhost port 8080, originator
+  ::1 port 37162
 debug1: connect_next: host www.ucm.es ([147.96.1.15]:80) in progress, fd=15
 debug1: channel 9: new [::1]
 debug1: confirm forwarded-tcpip
@@ -452,7 +471,7 @@ debug1: channel 9: connected to www.ucm.es port 80
       hace de proxy.
 
 \begin{lstlisting}
-Enter passphrase for key '/home/usuario/.ssh/id_rsa': 
+Enter passphrase for key '/home/usuario/.ssh/id_rsa':
 debug1: read PEM private key done: type RSA
 debug1: Authentication succeeded (publickey).
 Authenticated to 192.168.1.2 ([192.168.1.2]:22).
@@ -496,11 +515,14 @@ debug1: channel 16: new [dynamic-tcpip]
 debug1: Connection to port 1080 forwarding to socks port 0 requested.
 debug1: channel 17: new [dynamic-tcpip]
 channel 15: open failed: administratively prohibited: open failed
-debug1: channel 15: free: direct-tcpip: listening port 1080 for xcsvmqbwrjy port 80, connect from ::1 port 51147, nchannels 18
+debug1: channel 15: free: direct-tcpip: listening port 1080 for xcsvmqbwrjy
+  port 80, connect from ::1 port 51147, nchannels 18
 channel 16: open failed: administratively prohibited: open failed
 channel 17: open failed: administratively prohibited: open failed
-debug1: channel 16: free: direct-tcpip: listening port 1080 for kpkchnuhbfv port 80, connect from ::1 port 51148, nchannels 17
-debug1: channel 17: free: direct-tcpip: listening port 1080 for urhtjlxedlzo port 80, connect from ::1 port 51149, nchannels 16
+debug1: channel 16: free: direct-tcpip: listening port 1080 for kpkchnuhbfv
+  port 80, connect from ::1 port 51148, nchannels 17
+debug1: channel 17: free: direct-tcpip: listening port 1080 for urhtjlxedlzo
+  port 80, connect from ::1 port 51149, nchannels 16
 debug1: Connection to port 1080 forwarding to socks port 0 requested.
 debug1: channel 15: new [dynamic-tcpip]
 debug1: Connection to port 1080 forwarding to socks port 0 requested.
@@ -521,14 +543,22 @@ debug1: Connection to port 1080 forwarding to socks port 0 requested.
 debug1: channel 23: new [dynamic-tcpip]
 debug1: Connection to port 1080 forwarding to socks port 0 requested.
 debug1: channel 24: new [dynamic-tcpip]
-debug1: channel 8: free: direct-tcpip: listening port 1080 for www.google.es port 443, connect from ::1 port 51140, nchannels 25
-debug1: channel 9: free: direct-tcpip: listening port 1080 for www.google.es port 443, connect from ::1 port 51141, nchannels 24
-debug1: channel 10: free: direct-tcpip: listening port 1080 for www.google.es port 443, connect from ::1 port 51142, nchannels 23
-debug1: channel 11: free: direct-tcpip: listening port 1080 for www.google.es port 443, connect from ::1 port 51143, nchannels 22
-debug1: channel 4: free: direct-tcpip: listening port 1080 for apis.google.com port 443, connect from ::1 port 51136, nchannels 21
-debug1: channel 5: free: direct-tcpip: listening port 1080 for ssl.gstatic.com port 443, connect from ::1 port 51137, nchannels 20
-debug1: channel 6: free: direct-tcpip: listening port 1080 for ssl.gstatic.com port 443, connect from ::1 port 51138, nchannels 19
-debug1: channel 12: free: direct-tcpip: listening port 1080 for www.gstatic.com port 443, connect from ::1 port 51144, nchannels 18
+debug1: channel 8: free: direct-tcpip: listening port 1080 for www.google.es
+  port 443, connect from ::1 port 51140, nchannels 25
+debug1: channel 9: free: direct-tcpip: listening port 1080 for www.google.es
+  port 443, connect from ::1 port 51141, nchannels 24
+debug1: channel 10: free: direct-tcpip: listening port 1080 for www.google.es
+  port 443, connect from ::1 port 51142, nchannels 23
+debug1: channel 11: free: direct-tcpip: listening port 1080 for www.google.es
+  port 443, connect from ::1 port 51143, nchannels 22
+debug1: channel 4: free: direct-tcpip: listening port 1080 for apis.google.com
+  port 443, connect from ::1 port 51136, nchannels 21
+debug1: channel 5: free: direct-tcpip: listening port 1080 for ssl.gstatic.com
+  port 443, connect from ::1 port 51137, nchannels 20
+debug1: channel 6: free: direct-tcpip: listening port 1080 for ssl.gstatic.com
+  port 443, connect from ::1 port 51138, nchannels 19
+debug1: channel 12: free: direct-tcpip: listening port 1080 for www.gstatic.com
+  port 443, connect from ::1 port 51144, nchannels 18
 \end{lstlisting}
 
 \end{document}

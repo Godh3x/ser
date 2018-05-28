@@ -1,10 +1,102 @@
-# Practica 11
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
 
-## Consultas recursivas DNSSEC
+%%% PAGE DIMENSIONS
+\usepackage{geometry}
+\geometry{a4paper}
 
-_Resultado_
+\usepackage{graphicx}
 
-```
+%%% PACKAGES
+\usepackage{booktabs}
+\usepackage{paralist}
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{chngcntr}
+\usepackage{tikz}
+\usepackage[colorlinks = true,
+            linkcolor = black,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+\usepackage[spanish]{cleveref}
+\usepackage{placeins}
+\usepackage{float}
+\usepackage{listings}
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape}
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+
+\graphicspath{ {images/} }
+
+\counterwithin*{figure}{section}
+\counterwithin*{figure}{subsection}
+\counterwithin*{figure}{subsubsection}
+
+\counterwithin*{table}{section}
+\counterwithin*{table}{subsection}
+\counterwithin*{table}{subsubsection}
+
+\addtolength{\cftfignumwidth}{2em}
+
+\renewcommand{\thefigure}{
+  \ifnum\value{subsection}=0
+    \thesection.\arabic{figure}
+  \else
+    \ifnum\value{subsubsection}=0
+      \thesubsection.\arabic{figure}
+    \else
+      \thesubsubsection.\arabic{figure}
+    \fi
+  \fi
+}
+
+\renewcommand{\thetable}{
+  \ifnum\value{subsection}=0
+    \thesection.\arabic{table}
+  \else
+    \ifnum\value{subsubsection}=0
+      \thesubsection.\arabic{table}
+    \else
+      \thesubsubsection.\arabic{table}
+    \fi
+  \fi
+}
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{\Large Seguridad en Redes\\Practica 4.3}
+\author{David Antuña Rodríguez\\Javier Carrión García}
+\date{}
+
+\begin{document}
+\raggedright
+
+\maketitle
+\newpage
+
+\section{Consultas recursivas DNSSEC}
+
+Salida:
+
+\begin{lstlisting}
 www.example.com@8.8.8.8 (Google):
 ; <<>> DiG 9.8.2rc1-RedHat-9.8.2-0.62.rc1.el6_9.5 <<>> A +additional +multiline +dnssec www.example.com. @8.8.8.8
 ;; global options: +cmd
@@ -20,39 +112,41 @@ www.example.com@8.8.8.8 (Google):
 ;; ANSWER SECTION:
 www.example.com.	17527 IN A 93.184.216.34
 www.example.com.	17527 IN RRSIG A 8 3 86400 20180528165149 (
-				20180507220712 30381 example.com.
-				EsLJLNCADwZG0G+75lsXGihaxoyBNv6VTt52xLsyTlrj
-				kZ7hNowb9LSAeotStuqXSp2hA3KLJ5p0Tf+Lm6xFctfz
-				/JTW3E89VXFKSYFhL5HCbERtvGOzyhUwY7p4ODpUmxed
-				SDdi1JSaI2nlwGahWcZOXoGXs7crAiHnwWkgSG4= )
+  20180507220712 30381 example.com.
+  EsLJLNCADwZG0G+75lsXGihaxoyBNv6VTt52xLsyTlrj
+  kZ7hNowb9LSAeotStuqXSp2hA3KLJ5p0Tf+Lm6xFctfz
+  /JTW3E89VXFKSYFhL5HCbERtvGOzyhUwY7p4ODpUmxed
+  SDdi1JSaI2nlwGahWcZOXoGXs7crAiHnwWkgSG4= )
 
 ;; Query time: 1 msec
 ;; SERVER: 8.8.8.8#53(8.8.8.8)
 ;; WHEN: Tue May 22 12:21:53 2018
 ;; MSG SIZE  rcvd: 231
-```
+\end{lstlisting}
+
+\medskip
 
 En RRSIG
-* Tipo de registro: A
-* Algoritmo de firma digital: RSA/SHA-256
-* Componentes del dominio: 3
-* TTL: 86400
-* Fecha de expiracion: 28/05/2018
-* Fecha de firma: 07/05/2018
-* ID clave de firma: 30381
-* Nombre del dominio: example.com.
-* Firma digital en base 64:
+\begin{itemize}
+  \item Tipo de registro: A
+  \item Algoritmo de firma digital: RSA/SHA-256
+  \item Componentes del dominio: 3
+  \item TTL: 86400
+  \item Fecha de expiracion: 28/05/2018
+  \item Fecha de firma: 07/05/2018
+  \item ID clave de firma: 30381
+  \item Nombre del dominio: example.com.
+  \item Firma digital en base 64:\\
+    EsLJLNCADwZG0G+75lsXGihaxoyBNv6VTt52xLsyTlrj
+    kZ7hNowb9LSAeotStuqXSp2hA3KLJ5p0Tf+Lm6xFctfz
+    /JTW3E89VXFKSYFhL5HCbERtvGOzyhUwY7p4ODpUmxed
+    SDdi1JSaI2nlwGahWcZOXoGXs7crAiHnwWkgSG4=
+\end{itemize}
 
-	EsLJLNCADwZG0G+75lsXGihaxoyBNv6VTt52xLsyTlrj
-	kZ7hNowb9LSAeotStuqXSp2hA3KLJ5p0Tf+Lm6xFctfz
-	/JTW3E89VXFKSYFhL5HCbERtvGOzyhUwY7p4ODpUmxed
-	SDdi1JSaI2nlwGahWcZOXoGXs7crAiHnwWkgSG4=
 
------
+\section{Consultas iterativas DNSSEC}
 
-## Consultas iterativas DNSSEC
-
-```
+\begin{lstlisting}
 ; <<>> DiG 9.8.2rc1-RedHat-9.8.2-0.62.rc1.el6_9.5 <<>> A +additional +multiline +trace +dnssec www.example.com. @8.8.8.8
 ;; global options: +cmd
 .			28640 IN NS a.root-servers.net.
@@ -69,15 +163,15 @@ En RRSIG
 .			28640 IN NS l.root-servers.net.
 .			28640 IN NS m.root-servers.net.
 .			28640 IN RRSIG NS 8 0 518400 20180601050000 (
-				20180519040000 39570 .
-				pY2wDGRT2c9FTU2ET0cHqIPJ048j/gzhTUImew3hsF92
-				uiPVH4sDQjZUfkfNp7GOog4uLOQRj1AU3WC2H1GyCLx0
-				0gxrcgUTgCJLxQjT5x33Ar6wF6OgTFjbnTnIa2388VCn
-				KDYAL9qBaES50jwQEavqrHoZLlngrRNvxZ3QGQ+TfEIU
-				z4vfKyxElx6wpbiOcUw4caerDxBVque9EkBtuXx8ixzZ
-				PVs8bsNXkfkcgkKUViB5goBiMeRWZZNd+WRjyH3ZyjIJ
-				h6kXmn70ncBiR6U0zqTfCq+pzx7y8YBpehXrL6qLHrHA
-				wBCvUX2dvyGHQt3q6JNKhJDea9elqQnLHg== )
+        20180519040000 39570 .
+        pY2wDGRT2c9FTU2ET0cHqIPJ048j/gzhTUImew3hsF92
+        uiPVH4sDQjZUfkfNp7GOog4uLOQRj1AU3WC2H1GyCLx0
+        0gxrcgUTgCJLxQjT5x33Ar6wF6OgTFjbnTnIa2388VCn
+        KDYAL9qBaES50jwQEavqrHoZLlngrRNvxZ3QGQ+TfEIU
+        z4vfKyxElx6wpbiOcUw4caerDxBVque9EkBtuXx8ixzZ
+        PVs8bsNXkfkcgkKUViB5goBiMeRWZZNd+WRjyH3ZyjIJ
+        h6kXmn70ncBiR6U0zqTfCq+pzx7y8YBpehXrL6qLHrHA
+        wBCvUX2dvyGHQt3q6JNKhJDea9elqQnLHg== )
 ;; Received 525 bytes from 8.8.8.8#53(8.8.8.8) in 5 ms
 
 com.			172800 IN NS l.gtld-servers.net.
@@ -94,182 +188,234 @@ com.			172800 IN NS k.gtld-servers.net.
 com.			172800 IN NS f.gtld-servers.net.
 com.			172800 IN NS i.gtld-servers.net.
 com.			86400 IN DS 30909 8 2 (
-				E2D3C916F6DEEAC73294E8268FB5885044A833FC5459
-				588F4A9184CFC41A5766 )
+        E2D3C916F6DEEAC73294E8268FB5885044A833FC5459
+        588F4A9184CFC41A5766 )
 com.			86400 IN RRSIG DS 8 1 86400 20180604050000 (
-				20180522040000 39570 .
-				jXYmL0nVUHnwgGOdBUfx97tmMHKNSAyxHgPqx9Fb2kJU
-				/Uv4aGZDjD3WDdYs0pD9Nnd29BjbT1gZyKC6gFRdtCjy
-				uhH2aHfCKD8c/pTfLEDCGeYkkArKwiUL84X28zzcLtkH
-				27sBcZPuH2i09CfghmT3BaycuP6P/WulY36yFv4nfuNB
-				RatYGRw8qnKaPkPlMdmW6UQEPwIuXtCXO4l3Duy1961a
-				XA2+hctjI/b9vpjl3gJC0pDzPdqiHhIe9MVmNrwsjEoC
-				RbYrSWim+gSvoXROLRDL8i1VZDbh3t+4HQO0L4pq3yzw
-				PWq4ccIC7az0VDrMMg/IorzkdTNacN/HUA== )
+        20180522040000 39570 .
+        jXYmL0nVUHnwgGOdBUfx97tmMHKNSAyxHgPqx9Fb2kJU
+        /Uv4aGZDjD3WDdYs0pD9Nnd29BjbT1gZyKC6gFRdtCjy
+        uhH2aHfCKD8c/pTfLEDCGeYkkArKwiUL84X28zzcLtkH
+        27sBcZPuH2i09CfghmT3BaycuP6P/WulY36yFv4nfuNB
+        RatYGRw8qnKaPkPlMdmW6UQEPwIuXtCXO4l3Duy1961a
+        XA2+hctjI/b9vpjl3gJC0pDzPdqiHhIe9MVmNrwsjEoC
+        RbYrSWim+gSvoXROLRDL8i1VZDbh3t+4HQO0L4pq3yzw
+        PWq4ccIC7az0VDrMMg/IorzkdTNacN/HUA== )
 ;; Received 1175 bytes from 192.112.36.4#53(192.112.36.4) in 26 ms
 
 example.com.		172800 IN NS a.iana-servers.net.
 example.com.		172800 IN NS b.iana-servers.net.
 example.com.		86400 IN DS 31589 8 1 (
-				3490A6806D47F17A34C29E2CE80E8A999FFBE4BE )
+        3490A6806D47F17A34C29E2CE80E8A999FFBE4BE )
 example.com.		86400 IN DS 31589 8 2 (
-				CDE0D742D6998AA554A92D890F8184C698CFAC8A26FA
-				59875A990C03E576343C )
+        CDE0D742D6998AA554A92D890F8184C698CFAC8A26FA
+        59875A990C03E576343C )
 example.com.		86400 IN DS 43547 8 1 (
-				B6225AB2CC613E0DCA7962BDC2342EA4F1B56083 )
+        B6225AB2CC613E0DCA7962BDC2342EA4F1B56083 )
 example.com.		86400 IN DS 43547 8 2 (
-				615A64233543F66F44D68933625B17497C89A70E858E
-				D76A2145997EDF96A918 )
+        615A64233543F66F44D68933625B17497C89A70E858E
+        D76A2145997EDF96A918 )
 example.com.		86400 IN DS 31406 8 1 (
-				189968811E6EBA862DD6C209F75623D8D9ED9142 )
+        189968811E6EBA862DD6C209F75623D8D9ED9142 )
 example.com.		86400 IN DS 31406 8 2 (
-				F78CF3344F72137235098ECBBD08947C2C9001C7F6A0
-				85A17F518B5D8F6B916D )
+        F78CF3344F72137235098ECBBD08947C2C9001C7F6A0
+        85A17F518B5D8F6B916D )
 example.com.		86400 IN RRSIG DS 8 2 86400 20180527042417 (
-				20180520031417 36707 com.
-				RBarp4dfMz8caraD+4L/vpTltysxnrLyVC6eDXDfq+vY
-				6D6QDNE6TdG16OyiTQcPjvIfRkqu3mjGRIDK3NUNs5Y7
-				Ifk+XqJgy9rdy3WrUdt353l/lifPo7i0mRVwJAgjkeeA
-				g3Evz4mEEfqu0m4lJFtY3MjGK7wcVESUSTzHtoc= )
+        20180520031417 36707 com.
+        RBarp4dfMz8caraD+4L/vpTltysxnrLyVC6eDXDfq+vY
+        6D6QDNE6TdG16OyiTQcPjvIfRkqu3mjGRIDK3NUNs5Y7
+        Ifk+XqJgy9rdy3WrUdt353l/lifPo7i0mRVwJAgjkeeA
+        g3Evz4mEEfqu0m4lJFtY3MjGK7wcVESUSTzHtoc= )
 ;; Received 595 bytes from 192.52.178.30#53(192.52.178.30) in 21 ms
 
 www.example.com.	86400 IN A 93.184.216.34
 www.example.com.	86400 IN RRSIG A 8 3 86400 20180612053429 (
-				20180522075626 4354 example.com.
-				AkEbv0lUfyjLr8puN8f+qDgGhJU4gQHvYtcNet7iqdkZ
-				wQcQDhlFxCsdr140TzItKWHUWyv+z1A+3jWrpoIWYOz/
-				o8ekEgefFhAmk9GpiDfeE7nMuDqDupe3JEqZYu+nxrKw
-				M8JQkZ7+ijw/BSokvbKvS+nMmPzw2/wVk4iDs60= )
+        20180522075626 4354 example.com.
+        AkEbv0lUfyjLr8puN8f+qDgGhJU4gQHvYtcNet7iqdkZ
+        wQcQDhlFxCsdr140TzItKWHUWyv+z1A+3jWrpoIWYOz/
+        o8ekEgefFhAmk9GpiDfeE7nMuDqDupe3JEqZYu+nxrKw
+        M8JQkZ7+ijw/BSokvbKvS+nMmPzw2/wVk4iDs60= )
 example.com.		86400 IN NS b.iana-servers.net.
 example.com.		86400 IN NS a.iana-servers.net.
 example.com.		86400 IN RRSIG NS 8 2 86400 20180612105904 (
-				20180522075626 4354 example.com.
-				R72G9nNtxkqS/bJEZPSsMzeAdnYeU4aRykn5ZbZxZwT9
-				hVBeZMY+1SvSbaT8KeMk1tbHQRZIhkdpuDUNwSlBJmPk
-				kpCbnL/XCsJfeuTGaNwzXugztysW3f6K6e1mwqxhPXwu
-				+qKuA1kNJJFE2hGKwi/Go/U6Y1j44Ln4A8W/sJM= )
+        20180522075626 4354 example.com.
+        R72G9nNtxkqS/bJEZPSsMzeAdnYeU4aRykn5ZbZxZwT9
+        hVBeZMY+1SvSbaT8KeMk1tbHQRZIhkdpuDUNwSlBJmPk
+        kpCbnL/XCsJfeuTGaNwzXugztysW3f6K6e1mwqxhPXwu
+        +qKuA1kNJJFE2hGKwi/Go/U6Y1j44Ln4A8W/sJM= )
 ;; Received 538 bytes from 199.43.133.53#53(199.43.133.53) in 51 ms
-```
+\end{lstlisting}
 
-Registro DS de la zona *com.*
-* Id clave: 30909
-* Algoritmo de firma digital: RSA/SHA-256
-* Algorimo de resumen: SHA-256
-* Resumen en base64:  E2D3C916F6DEEAC73294E8268FB5885044A833FC5459588F4A9184CFC41A5766
+\medskip
 
-Registro DS de la zona *example.com.*
-* Id clave: 31589
-* Algoritmo de firma digital: RSA/SHA-256
-* Algorimo de resumen: SHA-1
-* Resumen en base64: 3490A6806D47F17A34C29E2CE80E8A999FFBE4BE
+Registro DS de la zona \textbf{com.}
 
-Registro DS de la zona *example.com.*
-* Id clave: 31589
-* Algoritmo de firma digital: RSA/SHA-256
-* Algorimo de resumen: SHA-256
-* Resumen en base64: CDE0D742D6998AA554A92D890F8184C698CFAC8A26FA59875A990C03E576343C
+\begin{itemize}
+  \item Id clave: 30909
+  \item Algoritmo de firma digital: RSA/SHA-256
+  \item Algorimo de resumen: SHA-256
+  \item Resumen en base64:\\
+    E2D3C916F6DEEAC73294E8268FB5885044A833FC5459588F4A9184CFC41A5766
+\end{itemize}
 
-Registro DS de la zona *example.com.*
-* Id clave: 43547
-* Algoritmo de firma digital: RSA/SHA-256
-* Algorimo de resumen: SHA-1
-* Resumen en base64: B6225AB2CC613E0DCA7962BDC2342EA4F1B56083
+\medskip
 
-Registro DS de la zona *example.com.*
-* Id clave: 43547
-* Algoritmo de firma digital: RSA/SHA-256
-* Algorimo de resumen: SHA-256
-* Resumen en base64: 615A64233543F66F44D68933625B17497C89A70E858ED76A2145997EDF96A918
+Registro DS de la zona \textbf{example.com.}
 
-Registro DS de la zona *example.com.*
-* Id clave: 31406
-* Algoritmo de firma digital: RSA/SHA-256
-* Algorimo de resumen: SHA-256
-* Resumen en base64: F78CF3344F72137235098ECBBD08947C2C9001C7F6A085A17F518B5D8F6B916D
+\begin{itemize}
+  \item Id clave: 31589
+  \item Algoritmo de firma digital: RSA/SHA-256
+  \item Algorimo de resumen: SHA-1
+  \item Resumen en base64:\\
+    3490A6806D47F17A34C29E2CE80E8A999FFBE4BE
+\end{itemize}
 
------
+\medskip
 
-## Claves DNSSEC
+Registro DS de la zona \textbf{example.com.}
 
-_Zona ._
+\begin{itemize}
+  \item Id clave: 31589
+  \item Algoritmo de firma digital: RSA/SHA-256
+  \item Algorimo de resumen: SHA-256
+  \item Resumen en base64:\\
+    CDE0D742D6998AA554A92D890F8184C698CFAC8A26FA59875A990C03E576343C
+\end{itemize}
 
-Id clave KSK: 19036 y 20326
+\medskip
 
-Id clave ZSK: 39570
+Registro DS de la zona \textbf{example.com.}
 
-_Zona com._
+\begin{itemize}
+  \item Id clave: 43547
+  \item Algoritmo de firma digital: RSA/SHA-256
+  \item Algorimo de resumen: SHA-1
+  \item Resumen en base64:\\
+    B6225AB2CC613E0DCA7962BDC2342EA4F1B56083
+\end{itemize}
 
-Id clave KSK: 30909
+\medskip
 
-Id clave ZSK: 36707
+Registro DS de la zona \textbf{example.com.}
 
-_Zona example.com._
+\begin{itemize}
+  \item Id clave: 43547
+  \item Algoritmo de firma digital: RSA/SHA-256
+  \item Algorimo de resumen: SHA-256
+  \item Resumen en base64:\\
+    615A64233543F66F44D68933625B17497C89A70E858ED76A2145997EDF96A918
+\end{itemize}
 
-Id clave KSK: 45620 y 31406
+\medskip
 
-Id clave ZSK: 30381 y 4354
+Registro DS de la zona \textbf{example.com.}
+
+\begin{itemize}
+  \item Id clave: 31406
+  \item Algoritmo de firma digital: RSA/SHA-256
+  \item Algorimo de resumen: SHA-256
+  \item Resumen en base64:\\
+    F78CF3344F72137235098ECBBD08947C2C9001C7F6A085A17F518B5D8F6B916D
+\end{itemize}
+
+
+\section{Claves DNSSEC}
+
+Zona \textbf{.}
+
+\begin{itemize}
+  \item ID clave KSK: 19036 y 20326
+  \item ID clave ZSK: 39570
+\end{itemize}
+
+\medskip
+
+Zona \textbf{com.}
+
+\begin{itemize}
+  \item ID clave KSK: 30909
+  \item ID clave ZSK: 36707
+\end{itemize}
+
+\medskip
+
+Zona \textbf{example.com.}
+
+\begin{itemize}
+  \item ID clave KSK: 45620 y 31406
+  \item ID clave ZSK: 30381 y 4354
+\end{itemize}
+
+\medskip
 
 Los registros DS validos de cada zona son los que emplean las siguientes firmas:
-* _com._ emplea la firma KSK con id 30909
-* _example.com._ utililza la firma KSK con id 31406.
+
+\begin{itemize}
+  \item \textit{com.} emplea la firma KSK con id 30909
+  \item \textit{example.com.} utililza la firma KSK con id 31406.
+\end{itemize}
+
+\medskip
 
 En el registro RRSIG de:
-* _._ utiliza su propia ZSK con id 39570.
-* _com._ utiliza la ZSK de _._ con id 39570.
-* _example.com._ se emplea la ZSK de _com._ 36707.
-* _www.example.com_ la ZSK pertenece a _example.com._ con id 4354.
 
------
+\begin{itemize}
+  \item \textit{.} utiliza su propia ZSK con id 39570.
+  \item \textit{com.} utiliza la ZSK de \textit{.} con id 39570.
+  \item \textit{example.com.} se emplea la ZSK de \textit{com.} 36707.
+  \item \textit{www.example.com} la ZSK pertenece a \textit{example.com.} con id
+    4354.
+\end{itemize}
 
-## Validación de firmas DNSSEC
+\section{Validación de firmas DNSSEC}
 
-1. verifica _._.
+1. Verifica .
 
-```
+\begin{lstlisting}
 ;; Ok, find a Trusted Key in the DNSKEY RRset: 19036
 ;; VERIFYING DNSKEY RRset for . with DNSKEY:19036: success
 
 ;; We are in a Grand Father Problem: See 2.2.1 in RFC 3568
 ;; and we try to continue chain of trust validation of the zone: com.
+\end{lstlisting}
 
-```
- 
- 2. verifica _com._.
+\medskip
 
-```
+2. Verifica com.
+
+\begin{lstlisting}
 ;; OK a DS valids a DNSKEY in the RRset
 ;; Now verify that this DNSKEY validates the DNSKEY RRset
 ;; VERIFYING DNSKEY RRset for com. with DNSKEY:30909: success
 
 ;; We are in a Grand Father Problem: See 2.2.1 in RFC 3568
 ;; and we try to continue chain of trust validation of the zone: example.com.
+\end{lstlisting}
 
-```
- 
-  3. verifica _example.com._.
+\medskip
 
-```
+3. Verifica example.com.
+
+\begin{lstlisting}
 ;; VERIFYING DS RRset for example.com. with DNSKEY:36707: success
-```
+\end{lstlisting}
 
-  4. Respuesta
-  
-```
-;; The Answer:
+\medskip
+
+4. Respuesta
+
+\begin{lstlisting}
 www.example.com.	17831	IN	A	93.184.216.34
 
 
 ;; FINISH : we have validate the DNSSEC chain of trust: SUCCESS
+\end{lstlisting}
 
-```
 
------
+\section{Negación de existencia autenticada DNSSEC}
 
-## Negación de existencia autenticada DNSSEC
+Respuesta:
 
-_Respuesta_
-
-```
+\begin{lstlisting}
 ; <<>> DiG 9.8.4-rpz2+rl005.12-P1 <<>> fake.verisign.com A +dnssec
 ;; global options: +cmd
 ;; Got answer:
@@ -295,26 +441,26 @@ ip7epa1q9p34q9bm9vs1b6ka333kbv1b.verisign.com. 21599 IN	RRSIG NSEC3 8 3 86400 20
 ;; SERVER: 8.8.8.8#53(8.8.8.8)
 ;; WHEN: Tue May 22 13:18:12 2018
 ;; MSG SIZE  rcvd: 1045
-```
+\end{lstlisting}
 
-Aparecen 3 registros NSEC3, la diferencia entre el campo de nombres de propietario resumido es que ne NSEC ves los nombres de las zonas y en NSEC3 no.
+\medskip
 
------
+Aparecen 3 registros NSEC3, la diferencia entre el campo de nombres de
+propietario resumido es que ne NSEC ves los nombres de las zonas y en NSEC3 no.
 
-## Transferencia de zonas DNS
 
-_Registros de la zona_
+\section{Transferencia de zonas DNS}
 
-```
+\begin{lstlisting}
 ; <<>> DiG 9.8.2rc1-RedHat-9.8.2-0.62.rc1.el6_9.5 <<>> AXFR +additional +multiline +dnssec zonetransfer.me. @nsztm2.digi.ninja.
 ;; global options: +cmd
 zonetransfer.me.	7200 IN	SOA nsztm1.digi.ninja. robin.digi.ninja. (
-				2017103001 ; serial
-				172800     ; refresh (2 days)
-				900        ; retry (15 minutes)
-				1209600    ; expire (2 weeks)
-				3600       ; minimum (1 hour)
-				)
+      2017103001 ; serial
+      172800     ; refresh (2 days)
+      900        ; retry (15 minutes)
+      1209600    ; expire (2 weeks)
+      3600       ; minimum (1 hour)
+      )
 zonetransfer.me.	300 IN HINFO "Casio fx-700G" "Windows XP"
 zonetransfer.me.	301 IN TXT "google-site-verification=tyP28J7JAUHA9fw2sHXMgcCC0I6XBmmoVi04VlMewxA"
 zonetransfer.me.	7200 IN	MX 0 ASPMX.L.GOOGLE.COM.
@@ -362,36 +508,16 @@ vpn.zonetransfer.me.	4000 IN	A 174.36.59.154
 www.zonetransfer.me.	7200 IN	A 217.147.177.157
 xss.zonetransfer.me.	300 IN TXT "'><script>alert('Boo')</script>"
 zonetransfer.me.	7200 IN	SOA nsztm1.digi.ninja. robin.digi.ninja. (
-				2017103001 ; serial
-				172800     ; refresh (2 days)
-				900        ; retry (15 minutes)
-				1209600    ; expire (2 weeks)
-				3600       ; minimum (1 hour)
-				)
+      2017103001 ; serial
+      172800     ; refresh (2 days)
+      900        ; retry (15 minutes)
+      1209600    ; expire (2 weeks)
+      3600       ; minimum (1 hour)
+      )
 ;; Query time: 21 msec
 ;; SERVER: 52.91.28.78#53(52.91.28.78)
 ;; WHEN: Tue May 22 13:27:52 2018
 ;; XFR size: 48 records (messages 1, bytes 1878)
-```
+\end{lstlisting}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\end{document}
